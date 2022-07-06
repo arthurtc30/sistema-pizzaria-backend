@@ -23,6 +23,9 @@ export function isAuthenticated(
     // Validar o token
     const { sub } = verify(token, process.env.JWT_SECRET) as Payload;
 
+    // Recuperar o id do token e colocando dentro de user_id no req
+    req.user_id = sub;
+
     return next();
   } catch (err) {
     return res.status(401).end();
